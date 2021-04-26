@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 
 import ViewImageScreen from './app/screens/ViewImageScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
@@ -13,15 +13,39 @@ import AccountScreen from './app/screens/AccountScreen';
 import ListingsScreen from './app/screens/ListingsScreen';
 import AppTextInput from './app/components/AppTextInput';
 import colors from './app/config/colors';
+import AppPicker from './app/components/AppPicker';
 
+
+const categories = [
+  {
+    label: 'furniture',
+    value: 1
+  },
+  {
+    label: 'clothing',
+    value: 2
+  },
+  {
+    label: 'gadgets',
+    value: 3
+  }
+];
 export default function App() {
-const [firstName, setFirstName] = useState('')
+
+  const [category, setCategory] = useState();
 
   return (
     <Screen>
-      <AppTextInput 
-        placeholder='Username' 
-        icon='email' 
+      <AppPicker
+        selectedItem={category}
+        onSelectItem={item => setCategory(item)}
+        items={categories}
+        icon='apps'
+        placeholder='category'
+      />
+      <AppTextInput
+        icon='email'
+        placeholder='email'
       />
     </Screen>
   );
