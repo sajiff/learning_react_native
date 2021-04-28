@@ -8,13 +8,13 @@ import AppText from './AppText'
 import Screen from './Screen'
 import PicketItem from './PicketItem'
 
-export default function AppPicker({ items, icon, placeholder, selectedItem, onSelectItem }) {
+export default function AppPicker({ items, icon, placeholder, selectedItem, onSelectItem, width="100%", PickerItemComponent= PicketItem, numberOfColumns=1 }) {
     const [modalVisible, setModalVisible] = useState(false);
     
     return (
         <React.Fragment>
             <TouchableWithoutFeedback onPress={() => setModalVisible(true)} >
-                <View style={styles.container} >
+                <View style={[styles.container, {width}]} >
                     {icon && <MaterialCommunityIcons
                         name={icon}
                         size={30}  
@@ -39,10 +39,12 @@ export default function AppPicker({ items, icon, placeholder, selectedItem, onSe
                     <FlatList 
                         data={items}
                         keyExtractor={item => item.value.toString() }
-                        renderItem={ ({item}) => <PicketItem 
+                        renderItem={ ({item}) => <PickerItemComponent 
+                            item={item}
                             label={item.label}
                             onPress={() => {setModalVisible(false)
                             onSelectItem(item);}} /> }
+                        numColumns={numberOfColumns}
                     />
                 </Screen>
             </Modal>
@@ -55,7 +57,6 @@ const styles = StyleSheet.create({
         backgroundColor: colors.light,
         borderRadius: 25,
         flexDirection: 'row',
-        width: '100%',
         padding: 15,
         marginVertical: 10
     },

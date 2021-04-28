@@ -1,5 +1,6 @@
 import React from 'react'
-import { Image, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import AppText from './AppText'
 import colors from '../config/colors'
@@ -15,9 +16,14 @@ export default function ListItem({ title, subTitle, image, IconComponent, onPres
                     {IconComponent}
                     {image && <Image style={styles.image} source={image}></Image>}
                     <View style={styles.detailsContainer} >
-                        <AppText style={styles.title} title={title}></AppText>
-                        {subTitle && <AppText style={styles.subTitle} title={subTitle}></AppText>}
+                        <AppText style={styles.title} title={title} numberOfLines={1}></AppText>
+                        {subTitle && <AppText style={styles.subTitle} title={subTitle} numberOfLines={2}></AppText>}
                     </View>
+                    <MaterialCommunityIcons
+                        name="chevron-right"
+                        size={25}
+                        color={colors.medium}
+                    />
                 </View>
             </TouchableHighlight>
         </Swipeable>
@@ -26,6 +32,7 @@ export default function ListItem({ title, subTitle, image, IconComponent, onPres
 
 const styles = StyleSheet.create({
     container: {
+        alignItems: 'center',
         flexDirection: 'row',
         padding: 20,
         backgroundColor: colors.white,
@@ -43,6 +50,7 @@ const styles = StyleSheet.create({
         
     },
     detailsContainer: {
+        flex: 1,
         marginLeft: 10,
         justifyContent: 'center',
     }

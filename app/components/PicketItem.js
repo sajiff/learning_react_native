@@ -2,10 +2,10 @@ import React from 'react'
 import { StyleSheet, TouchableOpacity} from 'react-native'
 import AppText from './AppText'
 
-export default function PicketItem({label, onPress}) {
+export default function PicketItem({item, label, onPress}) {
     return (
         <TouchableOpacity onPress={onPress} >
-            <AppText style={styles.text} title={label} />
+            <AppText style={styles.text} title={item.label} />
         </TouchableOpacity>
     )
 }
